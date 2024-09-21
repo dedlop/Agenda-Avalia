@@ -1,0 +1,13 @@
+{% extends "agenda_pacientes/base.html" %}
+
+{% block content %}
+    
+    <ul>
+        {% for paciente in pacientes %}
+            <li>{{ paciente }}</li>
+        {% empty %}
+            <li>Não há pacientes cadastrados.</li>
+        {% endfor %}
+    </ul>
+
+{% endblock content %}
