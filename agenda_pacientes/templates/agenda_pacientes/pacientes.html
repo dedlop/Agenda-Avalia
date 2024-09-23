@@ -1,13 +1,18 @@
 {% extends "agenda_pacientes/base.html" %}
 
 {% block content %}
+    Pacientes:
     
     <ul>
         {% for paciente in pacientes %}
-            <li>{{ paciente }}</li>
+            <li>
+                <a href="{% url 'paciente' paciente.id %}">{{ paciente }}</a>
+            </li>
         {% empty %}
             <li>Não há pacientes cadastrados.</li>
         {% endfor %}
     </ul>
+
+    <a href="{% url 'novo_paciente' %}">Adicionar novo paciente</a>
 
 {% endblock content %}
