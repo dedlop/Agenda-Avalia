@@ -6,7 +6,7 @@
     <ul>
         {% for paciente in pacientes %}
             <li>
-                <a href="{% url 'paciente' paciente.id %}">{{ paciente }}</a>
+                <a href="{% url 'consultas' paciente.id %}">{{ paciente }}</a>
             </li>
         {% empty %}
             <li>Não há pacientes cadastrados.</li>

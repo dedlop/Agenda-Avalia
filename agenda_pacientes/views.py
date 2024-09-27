@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Paciente
-from .forms import PacienteForm
+from .forms import PacienteForm, ConsultaForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
@@ -13,13 +13,6 @@ def pacientes(request):
     pacientes = Paciente.objects.order_by('date_added')
     context = {'pacientes': pacientes}
     return render(request, 'agenda_pacientes/pacientes.html', context)
-
-def paciente(request, paciente_id):
-    """Mostra os dados e horários do paciente"""
-    paciente = Paciente.objects.get(id = paciente_id)
-    dados = paciente.dados_set.order_by('-date_added')
-    context = {'paciente': paciente, 'dados': dados}
-    return render(request, 'agenda_pacientes/paciente.html', context)
 
 def novo_paciente(request):
     """Adiciona novo paciente"""
@@ -35,3 +28,30 @@ def novo_paciente(request):
     
     context = {'form': form}
     return render(request, 'agenda_pacientes/novo_paciente.html', context)
+
+def consultas(request, paciente_id):
+    """Mostra lista de consultas do paciente"""
+    paciente = Paciente.objects.get(id = paciente_id)
+    horarios = paciente.consulta_set.order_by('id')
+    context = {'paciente': paciente, 'horarios': horarios}
+    return render(request, 'agenda_pacientes/consultas.html', context)
+
+def nova_consulta(request, paciente_id):
+    """Agenda uma nova consulta"""
+    paciente = Paciente.objects.get(id = paciente_id)
+
+    if request.method != 'POST':
+        # Nenhum dado submetido; cria um formulário em branco
+        form = ConsultaForm()
+
+    else:
+        # Dados de POST submetidos; processa os dados
+        form = ConsultaForm(data=request.POST)
+        if form.is_valid():
+            nova_consulta = form.save(commit=False)
+            nova_consulta.paciente = paciente
+            nova_consulta.save()
+            return HttpResponseRedirect(reverse('consultas', args=[paciente_id]))
+        
+    context = {'paciente': paciente, 'form': form}
+    return render(request, 'agenda_pacientes/nova_consulta.html', context)

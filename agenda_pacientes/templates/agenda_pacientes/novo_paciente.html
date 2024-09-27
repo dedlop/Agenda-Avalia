@@ -1,6 +1,7 @@
 {% extends "agenda_pacientes/base.html" %}
 
 {% block content %}
+    <p>Adicione um novo Paciente: </p>
 
     <form action="{% url 'novo_paciente' %}" method='post'>
         {% csrf_token %}
