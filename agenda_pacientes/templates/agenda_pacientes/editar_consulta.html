@@ -1,0 +1,15 @@
+{% extends "agenda_pacientes/base.html" %}
+
+{% block content %}
+
+<p><a href="{% url 'consultas' paciente.id %}">{{ paciente }}</a></p>
+
+<p>Editar horário e data da consulta:</p>
+
+<form action="{% url 'editar_consulta' consulta.id %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">Salvar</button>
+</form>
+
+{% endblock content %}

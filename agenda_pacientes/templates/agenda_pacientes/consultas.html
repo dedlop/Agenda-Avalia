@@ -16,6 +16,9 @@
         <li>
             <p>{{ horario.data | date:"d/m/Y" }}</p>
             <p>{{ horario.hora | time:"H:i" }}</p>
+            <p>
+                <a href="{% url 'editar_consulta' horario.id %}">Editar consulta</a>
+            </p>
         </li>
 
         {% empty %}

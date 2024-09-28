@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Paciente
+from .models import Paciente, Consulta
 from .forms import PacienteForm, ConsultaForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -55,3 +55,23 @@ def nova_consulta(request, paciente_id):
         
     context = {'paciente': paciente, 'form': form}
     return render(request, 'agenda_pacientes/nova_consulta.html', context)
+
+def editar_consulta(request, consulta_id):
+    """Edita uma consulta existente"""
+    consulta = Consulta.objects.get(id=consulta_id)
+    paciente = consulta.paciente
+
+    if request.method != 'POST':
+        #Requisição inicial; preenche previamente o formulário com a entrada atual
+        form = ConsultaForm(instance=consulta)
+
+    else:
+        # Dados de Post submetidos; processa os dados
+        form = ConsultaForm(instance=consulta, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('consultas', args=[paciente.id]))
+        
+    context = {'consulta': consulta, 'paciente': paciente, 'form': form}
+    
+    return render(request, 'agenda_pacientes/editar_consulta.html', context)
