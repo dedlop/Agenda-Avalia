@@ -86,7 +86,7 @@ DATABASES = {
         'USER': os.getenv('default'),
         'PASSWORD': os.getenv('yFk0IHXBZJ9a'),
         'HOST': os.getenv('ep-bold-waterfall-a4nws39p-pooler.us-east-1.aws.neon.tech'),
-        'PORT': os.getenv('DB_PORT', '5432'),
+        'PORT': os.getenv('postgres://default:yFk0IHXBZJ9a@ep-bold-waterfall-a4nws39p-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require'),
     }
 }
 
