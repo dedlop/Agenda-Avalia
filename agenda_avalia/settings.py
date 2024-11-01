@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-+(9c!^9$*axie2(l35@uu54hrt^-^c*@!ff(#2d(dc4u$-e&wg
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -39,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'agenda_pacientes',
     'users',
+    
+    #Apps de terceiros
+    'bootstrap3',
 ]
 
 MIDDLEWARE = [
@@ -77,8 +81,12 @@ WSGI_APPLICATION = 'agenda_avalia.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('verceldb'),
+        'USER': os.getenv('default'),
+        'PASSWORD': os.getenv('yFk0IHXBZJ9a'),
+        'HOST': os.getenv('ep-bold-waterfall-a4nws39p-pooler.us-east-1.aws.neon.tech'),
+        'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
 
@@ -126,3 +134,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # URL login page
 LOGIN_URL ='/users/login'
+
+# Bootstrap3
+BOOTSTRAP3 = {
+    'include_jquery': True,
+}
