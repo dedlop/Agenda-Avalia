@@ -1,5 +1,13 @@
 {% extends "agenda_pacientes/base.html" %}
 
+{% block header %}
+    <div class="jumbotron">
+        <h1>Bem vindo a agenda de pacientes da Clínica Avalia</h1>
+    </div>
+{% endblock header %}
+
 {% block content %}
-    <p>Bem vindo a agenda de pacientes da Clínica Avalia</p>
+    <h2>
+        <a href="{% url 'register' %}">Crie uma conta</a> para utilizar o sistema de agendamento ou faça login para começar a utilizar.
+    </h2>
 {% endblock content %}
