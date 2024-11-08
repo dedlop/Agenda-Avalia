@@ -80,10 +80,15 @@ WSGI_APPLICATION = 'agenda_avalia.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'agenda',       # Nome do banco de dados no PostgreSQL
+        'USER': 'postgres',         # Usuário do PostgreSQL
+        'PASSWORD': 'root',       # Senha do PostgreSQL
+        'HOST': 'localhost',           # Ou o endereço do seu servidor PostgreSQL
+        'PORT': '5432',                # Porta padrão do PostgreSQL
     }
 }
+
 
 
 # Password validation
