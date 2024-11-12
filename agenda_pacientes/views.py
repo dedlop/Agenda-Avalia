@@ -4,10 +4,14 @@ from .forms import PacienteForm, ConsultaForm
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 
 def index(request):
     """Página principal da Agenda Avalia"""
-    return render(request, 'agenda_pacientes/index.html')
+    #Busca todas consultas de todos pacientes no banco de dados
+    now = timezone.now()
+    consultas = Consulta.objects.filter(data__gte=now.date()).order_by('data', 'hora')
+    return render(request, 'agenda_pacientes/index.html', {'consultas': consultas})
 
 @login_required
 def pacientes(request):

@@ -10,7 +10,25 @@
 
     {% if user.is_authenticated %}
 
-        <!-- Aqui vai ficar a lógica para puxar a agenda de todos usuários -->
+    <div class="container mt-4">
+        <h1>Consultas de Todos os Pacientes</h1>
+        
+        <div class="row">
+            {% for consulta in consultas %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ consulta.paciente.nome }}</h3>
+                            <p class="card-text">
+                                <strong>Data:</strong> {{ consulta.data }}<br>
+                                <strong>Hora:</strong> {{ consulta.hora }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 
     {% else %}
 
