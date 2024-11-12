@@ -1,15 +1,21 @@
 {% extends "agenda_pacientes/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+    <h1><a href="{% url 'consultas' paciente.id %}">{{ paciente }}</a></h1>
+{% endblock header %}
 
 {% block content %}
 
-<p><a href="{% url 'consultas' paciente.id %}">{{ paciente }}</a></p>
+<h3>Agende uma nova consulta:</h3>
 
-<p>Agende uma nova consulta:</p>
-
-<form action="{% url 'nova_consulta' paciente.id %}" method="post">
+<form action="{% url 'nova_consulta' paciente.id %}" method="post" class="form">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button name="submit">Adicionar</button>
+    {% bootstrap_form form %}
+
+    {% buttons %}
+    <button name="submit" class="btn btn-primary">Adicionar</button>
+    {% endbuttons %}
 </form> 
 
 {% endblock content %}

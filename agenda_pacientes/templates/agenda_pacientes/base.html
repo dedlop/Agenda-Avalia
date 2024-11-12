@@ -11,6 +11,18 @@
         {% bootstrap_css %}
         {% bootstrap_javascript %}
 
+        <style>
+            .ul-none ul{
+                display: none;
+            }
+
+            .help-block{
+                display: none;
+            }
+
+
+        </style>
+
     </head>
 
     <body>
@@ -41,7 +53,7 @@
             </div>  
         </nav>
         <div class="container">
-            <div>
+            <div class="page-header">
                 {% block header %}{% endblock header %}
             </div>
             <div>

@@ -1,34 +1,37 @@
 {% extends "agenda_pacientes/base.html" %}
 
+{% block header %}
+    <h2>Horários de {{ paciente }}</h2>
+{% endblock header %}
+
 {% block content %}
-
-    <h3>Horários de {{ paciente }}</h3>
-
-    <p>Agenda:</p>
 
     <p>
         <a href="{% url 'nova_consulta' paciente.id %}">Adicionar nova consulta</a>
     </p>
 
-    <ul>
-        {% for horario in horarios %}
 
-        <li>
-            <p>{{ horario.data | date:"d/m/Y" }}</p>
-            <p>{{ horario.hora | time:"H:i" }}</p>
-            <p>
-                <a href="{% url 'editar_consulta' horario.id %}">Editar consulta</a>
-            </p>
-        </li>
+        {% for horario in horarios %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>
+                        {{ horario.data | date:"d/m/Y" }}
+                        {{ horario.hora | time:"H:i" }}
+                        
+                        <small>
+                            <a href="{% url 'editar_consulta' horario.id %}">Editar consulta</a>
+                        </small>
+                        
+                    </h3>
+                </div>
+
+            </div>           
+
 
         {% empty %}
-
-        <li>
-            Não há registro
-        </li>
-
+            Não há registro.
         {% endfor %}
 
-    </ul>
+
 
 {% endblock content %}
